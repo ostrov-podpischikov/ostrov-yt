@@ -1,0 +1,46 @@
+name: Жители острова (YouTube)
+
+# Каждые 15 минут собирает комменты YouTube-канала и обновляет жителей.
+# Нужно: секрет YT_API_KEY и переменная YT_CHANNEL_ID (Settings → Secrets and variables → Actions).
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: residents
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Собрать жителей из комментов
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_CHANNEL_ID: ${{ vars.YT_CHANNEL_ID }}
+          YT_HANDLE: ${{ vars.YT_HANDLE }}
+          OSTROV_SITE_DATA: data
+        run: |
+          python tools/fetch_youtube.py
+          python tools/build_map.py
+      - name: Сохранить, если что-то изменилось
+        run: |
+          git config user.name "ostrov-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/residents.json tools/comments.json tools/stats.json data/residents.json data/polls.json
+          if git diff --cached --quiet; then
+            echo "Без изменений"
+          else
+            git commit -m "Жители острова: обновление"
+            git pull --rebase --autostash
+            git push
+          fi
