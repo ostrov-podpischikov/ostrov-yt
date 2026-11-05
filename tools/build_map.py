@@ -28,7 +28,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 # words in comments → details on the house (only these tags go to the site, never the text)
 WISHES = [
-    ("flag", ["флаг", "flag"]), ("fire", ["костер", "костр", "огонь", "огня"]), ("boat", ["лодк", "корабл", "яхт"]),
+    ("flag_kz", ["казахстан", "kazakhstan", "🇰🇿"]), ("flag", ["флаг", "flag"]), ("fire", ["костер", "костр", "огонь", "огня"]), ("boat", ["лодк", "корабл", "яхт"]),
     ("pet", ["собак", "пес", "щен", "кот", "кош", "питом"]), ("palm", ["пальм"]), ("lamp", ["маяк", "фонар"]),
     ("ball", ["футбол", "мяч", "роналду", "месси", "ronaldo", "messi"]), ("horse", ["лошад", "лошак", "конь", "коня", "коник", "жеребен"]),
     ("red", ["красн"]), ("blue", ["синий", "синем", "синего", "голуб"]), ("green", ["зелен"]), ("yellow", ["желт"]),
@@ -79,6 +79,8 @@ def wishes_by_nick():
         raw = c.get("text", "")
         text = raw.lower().replace("ё", "е")
         tags = [tag for tag, words in WISHES if any(w in text for w in words)]
+        if "flag_kz" in tags and "flag" in tags:
+            tags.remove("flag")  # «флаг Казахстана» is one flag
         biz = find_business(raw)
         if not tags and not biz:
             continue
