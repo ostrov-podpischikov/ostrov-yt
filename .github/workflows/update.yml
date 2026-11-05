@@ -37,6 +37,7 @@ jobs:
         run: |
           git config user.name "ostrov-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          touch tools/residents.json tools/comments.json tools/stats.json
           git add tools/residents.json tools/comments.json tools/stats.json data/residents.json data/polls.json
           if git diff --cached --quiet; then
             echo "Без изменений"
