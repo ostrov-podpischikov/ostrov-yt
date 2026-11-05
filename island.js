@@ -28,7 +28,7 @@
   ];
   // features shown on the resident card
   const FEATURES = {
-    flag: "🚩 флаг", fire: "🔥 костёр", barrel: "🛢 бочка", chest: "🧰 сундук", surf: "🏄 доска для серфинга",
+    flag: "🚩 флаг", flag_kz: "🇰🇿 флаг Казахстана", fire: "🔥 костёр", barrel: "🛢 бочка", chest: "🧰 сундук", surf: "🏄 доска для серфинга",
     hammock: "🏝 гамак", laundry: "👕 сушилка", torch: "🕯 факел", pot: "🌺 цветок", boat: "🛶 лодка",
     pet: "🐶 питомец", ball: "⚽ мяч", lamp: "🏮 фонарь", palm: "🌴 пальма", horse: "🐴 лошадка",
   };
@@ -223,6 +223,14 @@
   const SLOTS = [[1.75, 1.55], [-1.75, 1.55], [1.75, -1.6], [-1.75, -1.6]];
   const ITEMS = {
     flag: (b, x, y, z, v) => { b.box(x, y + 1.6, z, 0.1, 3.2, 0.1, "#DDDDDD"); b.box(x + 0.48, y + 2.9, z, 0.9, 0.55, 0.05, v.flag); },
+    // Kazakhstan: sky-blue cloth, a golden sun in the middle, an ornament strip by the pole — a bit bigger than a plain flag
+    flag_kz: (b, x, y, z) => {
+      b.box(x, y + 1.8, z, 0.1, 3.6, 0.1, "#DDDDDD");
+      b.box(x + 0.66, y + 3.1, z, 1.2, 0.72, 0.05, "#00AFCA");
+      b.box(x + 0.72, y + 3.12, z, 0.3, 0.3, 0.07, "#FEC50C").box(x + 0.72, y + 3.12, z, 0.42, 0.1, 0.06, "#FEC50C").box(x + 0.72, y + 3.12, z, 0.1, 0.42, 0.06, "#FEC50C");
+      b.box(x + 0.72, y + 2.9, z, 0.36, 0.06, 0.06, "#FEC50C");
+      b.box(x + 0.16, y + 3.1, z, 0.08, 0.66, 0.06, "#FEC50C");
+    },
     fire: (b, x, y, z) => {
       b.box(x, y + 0.1, z, 1.0, 0.18, 0.25, C.log2, C.log2, 0, 0.6).box(x, y + 0.1, z, 1.0, 0.18, 0.25, C.log2, C.log2, 0, -0.6);
       b.box(x, y + 0.35, z, 0.4, 0.4, 0.4, C.flame).box(x, y + 0.65, z, 0.22, 0.3, 0.22, C.flame2);
