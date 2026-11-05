@@ -30,6 +30,7 @@ jobs:
           YT_HANDLE: ${{ vars.YT_HANDLE }}
           OSTROV_SITE_DATA: data
         run: |
+          if [ -z "$YT_API_KEY" ]; then echo "Нет секрета YT_API_KEY — пропускаю"; exit 0; fi
           python tools/fetch_youtube.py
           python tools/build_map.py
       - name: Сохранить, если что-то изменилось
