@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "flag",
+    "question": "Какой флаг повесить над маяком?",
+    "how": "Пиши страну в комментах под Shorts «День 3» — каждый коммент +1 очко",
+    "since": "2026-11-07",
+    "per_comment": true,
+    "options": [
+      { "key": "kg", "label": "Кыргызстан", "emoji": "🇰🇬", "words": ["кыргыз", "киргиз", "kyrgyz"] },
+      { "key": "kz", "label": "Казахстан", "emoji": "🇰🇿", "words": ["казах", "kazakh"] },
+      { "key": "uz", "label": "Узбекистан", "emoji": "🇺🇿", "words": ["узбек", "uzbek"] },
+      { "key": "tj", "label": "Таджикистан", "emoji": "🇹🇯", "words": ["таджик", "tajik"] },
+      { "key": "ru", "label": "Россия", "emoji": "🇷🇺", "words": ["росси", "рф", "russia"] },
+      { "key": "az", "label": "Азербайджан", "emoji": "🇦🇿", "words": ["азер", "azer"] }
+    ]
+  }
+]
