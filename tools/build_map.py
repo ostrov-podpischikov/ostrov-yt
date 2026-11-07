@@ -154,7 +154,8 @@ def tally_polls():
             hit = hit or next((o["key"] for o in p["options"]
                                if any(w.startswith(k.replace("ё", "е")) for k in o.get("words", []) for w in words)), None)
             if hit and c.get("username"):
-                votes[c["username"]] = hit
+                # per_comment: every comment is +1 point (flag race); otherwise one vote per person
+                votes[c["id"] if p.get("per_comment") else c["username"]] = hit
         counts = {o["key"]: 0 for o in p["options"]}
         for k in votes.values():
             counts[k] += 1
